@@ -171,14 +171,14 @@ export default {
       this.selectedName = value;
       this.refreshResult();
       this.refreshGt();
-      //this.refreshPoints();
+      this.refreshPoints();
     },
     async txtChange(value){
       this.txtSelected=value
       await this.initResult();
       this.calIoU();
       this.sortNameListByIoU();
-      //this.refreshPoints();
+      this.refreshPoints();
     },
     xmlToJson(xml) {
       var obj = {};
@@ -423,6 +423,7 @@ export default {
     },
     findMaxIoU(videoName, type) {
       let gts = this.gtDatas[type][videoName];
+      console.log(this.resultDatas)
       let results = this.resultDatas[type][videoName];
       let IoUList = [];
       for (let i in results) {
@@ -484,9 +485,7 @@ export default {
           }
         }
       }
-      if(this.txtSelected==="stage2lgte_slide"){
-        this.selectedName = this.videoNameList[0];
-      }
+      this.selectedName = this.videoNameList[0];
       //this.selectedName="12_240_2020070302_li3zhi2_jian4kang1cha2ti3_2020_07_03_104325_64"
       this.refreshResult();
       this.refreshGt();
@@ -500,7 +499,6 @@ export default {
           this.selectedName.split("_")[this.selectedName.split("_").length - 1]
         ) + parseInt(startT);
       let temp_points = {};
-      console.log(actions)
       for (let i = 0; i < actions.length; i++) {
         if (startT <= actions[i][1] && endT >= actions[i][2]) {
           let newName =
@@ -535,12 +533,12 @@ export default {
       this.setVideoTime(0.8);
     },
     async initDatas() {
-      //await this.getActionTimes();
+      await this.getActionTimes();
       await this.getGt();
       await this.initResult();
       this.calIoU();
       this.sortNameListByIoU();
-      //this.refreshPoints();
+      this.refreshPoints();
     },
   },
   mounted() {
@@ -593,7 +591,7 @@ export default {
         ThroatSwallow: [5, "咽期吞咽启动"],
         ThroatTransport: [6, "咽腔运送"],
         LaryngealVestibuleClosure: [7, "喉前庭关闭"],
-        //AllTime: [8, "整体"],
+        AllTime: [8, "整体"],
       },
       gtLabelReverse: {
         1: "OralDelivery",
@@ -603,7 +601,7 @@ export default {
         5: "ThroatSwallow",
         6: "ThroatTransport",
         7: "LaryngealVestibuleClosure",
-        //8: "AllTime",
+        8: "AllTime",
       },
       //gtLabel:{
       //  "SoftPalateLift":[1,"软腭上抬"],
@@ -628,14 +626,13 @@ export default {
         ThroatSwallow: [],
         ThroatTransport: [],
         LaryngealVestibuleClosure: [],
-        //AllTime: []
       },
       iouTh: 1,
       videoNameList: [
-        "1_0.0_2021062302_nie4fang1_jian4kang1cha2ti3_2021_06_23_105123_64",
+        "7_48_2020122804_geng3kui2wen21_cha2ti3_2020_12_28_095725_32",
       ],
       selectedName:
-        "1_0.0_2021062302_nie4fang1_jian4kang1cha2ti3_2021_06_23_105123_64",
+        "7_48_2020122804_geng3kui2wen21_cha2ti3_2020_12_28_095725_32",
       progress: 0,
       duration: 0,
       ossBase: "https://swallow-videos.oss-cn-beijing.aliyuncs.com/",

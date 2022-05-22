@@ -176,8 +176,9 @@ export default {
     async txtChange(value){
       this.txtSelected=value
       await this.initResult();
+      if this.txtSelected==="stage2lgte_slide"{
       this.calIoU();
-      this.sortNameListByIoU();
+      this.sortNameListByIoU();}
       //this.refreshPoints();
     },
     xmlToJson(xml) {
@@ -484,9 +485,7 @@ export default {
           }
         }
       }
-      if(this.txtSelected==="stage2lgte_slide"){
-        this.selectedName = this.videoNameList[0];
-      }
+      this.selectedName = this.videoNameList[0];
       //this.selectedName="12_240_2020070302_li3zhi2_jian4kang1cha2ti3_2020_07_03_104325_64"
       this.refreshResult();
       this.refreshGt();

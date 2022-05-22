@@ -171,14 +171,14 @@ export default {
       this.selectedName = value;
       this.refreshResult();
       this.refreshGt();
-      //this.refreshPoints();
+      this.refreshPoints();
     },
     async txtChange(value){
       this.txtSelected=value
       await this.initResult();
       this.calIoU();
       this.sortNameListByIoU();
-      //this.refreshPoints();
+      this.refreshPoints();
     },
     xmlToJson(xml) {
       var obj = {};
@@ -484,9 +484,7 @@ export default {
           }
         }
       }
-      if(this.txtSelected==="stage2lgte_slide"){
-        this.selectedName = this.videoNameList[0];
-      }
+      this.selectedName = this.videoNameList[0];
       //this.selectedName="12_240_2020070302_li3zhi2_jian4kang1cha2ti3_2020_07_03_104325_64"
       this.refreshResult();
       this.refreshGt();
@@ -535,7 +533,7 @@ export default {
       this.setVideoTime(0.8);
     },
     async initDatas() {
-      //await this.getActionTimes();
+      await this.getActionTimes();
       await this.getGt();
       await this.initResult();
       this.calIoU();
@@ -632,10 +630,10 @@ export default {
       },
       iouTh: 1,
       videoNameList: [
-        "1_0.0_2021062302_nie4fang1_jian4kang1cha2ti3_2021_06_23_105123_64",
+        "7_48_2020122804_geng3kui2wen21_cha2ti3_2020_12_28_095725_32",
       ],
       selectedName:
-        "1_0.0_2021062302_nie4fang1_jian4kang1cha2ti3_2021_06_23_105123_64",
+        "7_48_2020122804_geng3kui2wen21_cha2ti3_2020_12_28_095725_32",
       progress: 0,
       duration: 0,
       ossBase: "https://swallow-videos.oss-cn-beijing.aliyuncs.com/",
