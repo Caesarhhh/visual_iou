@@ -27,7 +27,7 @@
         </div>
         <div class="switchTxt">
           <a-select :defaultValue="txtSelected" @change="txtChange">
-            <a-select-option v-for="(value,key,index) in txtDict" :key="key">
+            <a-select-option v-for="(value,key,index) in txtDict" :key="value">
               {{ key }}
             </a-select-option>
           </a-select>
@@ -177,7 +177,7 @@ export default {
       this.txtSelected=value
       await this.initResult();
       this.calIoU();
-      this.refreshResult();
+      this.sortNameListByIoU();
       //this.refreshPoints();
     },
     xmlToJson(xml) {
@@ -282,7 +282,7 @@ export default {
       };
     },
     async initResult() {
-      let fileName = this.txtDict[this.txtSelected];
+      let fileName = this.txtSelected;
       let url = this.ossBase + "txt/test0523/" + fileName;
       let that = this;
       await this.$axios.get(url).then((res) => {
@@ -567,7 +567,7 @@ export default {
         stage2lgte:"stage2lgte.txt",
         stage2lgte_slide:"stage2lgte_slide.txt"
       },
-      txtSelected:"stage2lgte_slide",
+      txtSelected:txtDict["stage2lgte_slide"],
       pointColorDict: {
         hyoid_bone_top: "red",
         hyoid_bone_left: "red",

@@ -27,7 +27,7 @@
         </div>
         <div class="switchTxt">
           <a-select :defaultValue="txtSelected" @change="txtChange">
-            <a-select-option v-for="(value,key,index) in txtDict" :key="key">
+            <a-select-option v-for="(value,key,index) in txtDict" :key="value">
               {{ key }}
             </a-select-option>
           </a-select>
@@ -177,7 +177,7 @@ export default {
       this.txtSelected=value
       await this.initResult();
       this.calIoU();
-      this.refreshResult();
+      this.sortNameListByIoU();
       //this.refreshPoints();
     },
     xmlToJson(xml) {
@@ -282,12 +282,14 @@ export default {
       };
     },
     async initResult() {
-      let fileName = this.txtDict[this.txtSelected];
+      let fileName = this.txtSelected;
       let url = this.ossBase + "txt/test0523/" + fileName;
       let that = this;
+      console.log(111)
       await this.$axios.get(url).then((res) => {
         that.resultDatas = this.getTruth(res.data);
       });
+      console.log(222)
     },
     refreshResult() {
       let temp_Area = [];
@@ -484,7 +486,7 @@ export default {
           }
         }
       }
-      if(this.txtSelected==="stage2lgte_slide" || this.txtSelected==="stage2lgte_slide.txt"){
+      if(this.txtSelected==="stage2lgte_slide"){
         this.selectedName = this.videoNameList[0];
       }
       //this.selectedName="12_240_2020070302_li3zhi2_jian4kang1cha2ti3_2020_07_03_104325_64"

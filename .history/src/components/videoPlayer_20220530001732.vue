@@ -177,7 +177,7 @@ export default {
       this.txtSelected=value
       await this.initResult();
       this.calIoU();
-      this.refreshResult();
+      this.sortNameListByIoU();
       //this.refreshPoints();
     },
     xmlToJson(xml) {
